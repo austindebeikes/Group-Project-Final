@@ -69,8 +69,8 @@ def edit_movie(movie_id):
     user = User.find_by_user_id(session["user_id"])
     return render_template("edit_movie.html", movie=movie, user=user)
 
-@app.post("/movies/update")
-def update_movie():
+@app.post("/movies/<int:movie_id>/update")
+def update_movie(movie_id):
 
     if "user_id" not in session:
         flash("You must be logged in to view that page", "login")
