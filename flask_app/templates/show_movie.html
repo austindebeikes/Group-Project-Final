@@ -1,0 +1,60 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta title="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+</head>
+<body style="display: flex; align-items: center; flex-direction: column; background-color: darkkhaki;">
+    <h1>Your Theater</h1>
+    <p>Check out this awesome movie!</p>
+    <nav class="navbar">
+        <div class="navbar-brand">My Movie Site</div>
+        <ul class="navbar-nav">
+            <li><a href="/movies/all" class="nav-button">Dashboard</a></li>
+            <li><a href="/users/logout" class="nav-button">Logout</a></li>
+        </ul>
+    </nav>
+        <div>
+            <div style="display: flex; align-items: center; gap: 5px;">
+                <h2>{{ movie.title }} -</h2>
+                <p>added by {{ movie.user.first_name }} {{ movie.user.last_name }}</p>
+            </div>
+            <p>Director: {{ movie.director }}</p>
+            <p>Release Date: {{ movie.release_date }}</p>
+            <p>Score: {{ movie.score }}</p>
+            <p>----------------------------</p>
+        </div>
+
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Details</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='src/styles.css') }}">
+</head>
+<body class="theater-background">
+    <nav class="navbar">
+        <div class="navbar-brand">My Movie Site</div>
+        <ul class="navbar-nav">
+            <li><a href="/movies/all" class="button">Dashboard</a></li>
+            <li><a href="/users/logout" class="button">Logout</a></li>
+        </ul>
+    </nav>
+    <div class="content">
+        <h1>{{ movie.user.first_name }}'s Theater</h1>
+        <p class="description">Check out this awesome movie!</p>
+        <div class="movie-details">
+            <h2>{{ movie.title }}</h2>
+            <p>Added by: {{ movie.user.first_name }} {{ movie.user.last_name }}</p>
+            <p>Director: {{ movie.director }}</p>
+            <p>Release Date: {{ movie.release_date }}</p>
+            <p>Score: {{ movie.score }}</p>
+        </div>
+    </div>
+</body>
+</html>

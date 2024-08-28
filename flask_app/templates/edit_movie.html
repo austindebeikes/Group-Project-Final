@@ -1,0 +1,162 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit a Movie</title>
+</head>
+<body style="display: flex; align-items: center; flex-direction: column; background-color: darkkhaki;">
+    <h1>Edit Movie Details</h1>
+    <div style="border: 2px solid black; margin-bottom: 20px; padding: 10px;">
+        <h2>Welcome {{ user.first_name }}!</h2>
+        <a href="/users/logout">Logout</a>
+        <a href="/movies/all">Dashboard</a>
+    </div>
+    {% with errors = get_flashed_messages() %}
+        {% if errors %}
+            {% for error in errors %}
+                <p>{{ error }}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <form action="/movies/update" method="post">
+        <input type="hidden" name="movie_id" value="{{ movie.id }}"/>
+        <div>
+            <label for="title">Title</label>
+            <input type="text" name="title" id="title" value="{{ movie.title }}">
+        </div>
+        <div>
+            <label for="director">Director</label>
+            <textarea name="director" id="director">{{ movie.director }}</textarea>
+        </div>
+        <div>
+            <label for="release_date">Release Date</label>
+            <input type="date" name="release_date" id="release_date" value="{{ movie.release_date }}">
+        </div>
+        <div>
+            <label for="score">Score</label>
+            <input type="int" name="score" id="score" value="{{ movie.score }}">
+        </div>
+        <button type="submit">Update</button>
+    </form>
+</body>
+</html>
+
+
+ -->
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Movie</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='src/styles.css') }}">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand">My Movie Site</div>
+        <ul class="navbar-nav">
+            <li><a href="/movies/all" class="button">Dashboard</a></li>
+            <li><a href="/users/logout" class="button">Logout</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <h1>Edit Movie</h1>
+        {% with errors = get_flashed_messages() %}
+        {% if errors %}
+        <ul>
+            {% for error in errors %}
+            <li class="error-message">{{ error }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+        <form action="/movies/{{ movie.id }}/update" method="post">
+            <input type="hidden" name="user_id" value="{{ session['user_id'] }}" />
+            <div>
+                <label for="title">Title</label>
+                <input type="text" name="title" id="title" value="{{ movie.title }}">
+            </div>
+            <div>
+                <label for="director">Director</label>
+                <input type="text" name="director" id="director" value="{{ movie.director }}">
+            </div>
+            <div>
+                <label for="release_date">Release Date</label>
+                <input type="date" name="release_date" id="release_date" value="{{ movie.release_date }}">
+            </div>
+            <div>
+                <label for="score">Score</label>
+                <textarea name="score" id="score">{{ movie.score }}</textarea>
+            </div>
+            <button type="submit">Update Movie</button>
+        </form>
+    </div>
+</body>
+
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Movie</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='src/styles.css') }}">
+</head>
+
+<body class="theater-background">
+    <nav class="navbar">
+        <div class="navbar-brand">My Movie Site</div>
+        <ul class="navbar-nav">
+            <li><a href="/movies/all" class="button">Dashboard</a></li>
+            <li><a href="/users/logout" class="button">Logout</a></li>
+        </ul>
+    </nav>
+
+    <main class="content">
+        <h1 class="page-title">Edit Movie Details</h1>
+
+        <div class="user-info">
+            <h2>Welcome {{ user.first_name }}!</h2>
+        </div>
+
+        {% with errors = get_flashed_messages() %}
+        {% if errors %}
+        <ul class="message-list">
+            {% for error in errors %}
+            <li class="message-item">{{ error }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+
+        <form action="/movies/{{ movie.id }}/update" method="post" class="form">
+            <input type="hidden" name="user_id" value="{{ session['user_id'] }}">
+            <div class="form-group">
+                <label for="title">Title:</label>
+                <input type="text" name="title" id="title" class="form-input" value="{{ movie.title }}">
+            </div>
+            <div class="form-group">
+                <label for="director">Director:</label>
+                <input type="text" name="director" id="director" class="form-input" value="{{ movie.director }}">
+            </div>
+            <div class="form-group">
+                <label for="release_date">Release Date:</label>
+                <input type="date" name="release_date" id="release_date" class="form-input" value="{{ movie.release_date }}">
+            </div>
+            <div class="form-group">
+                <label for="score">Score:</label>
+                <textarea name="score" id="score" class="form-input">{{ movie.score }}</textarea>
+            </div>
+            <button type="submit" class="form-btn">Update Movie</button>
+        </form>
+    </main>
+</body>
+
+</html>

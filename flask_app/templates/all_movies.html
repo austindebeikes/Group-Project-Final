@@ -1,0 +1,172 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='src/styles.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand">My Movie Site</div>
+        <ul class="navbar-nav">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+    <h1>Movie List</h1>
+    <p>Find, share and learn about others favorite movies!</p>
+    <div style="border: 2px solid black; margin-bottom: 20px; padding: 10px;">
+        <h2>Welcome {{ user.first_name }}!</h2>
+        <a href="/users/logout">Logout</a>
+    </div>
+    <a href="/movies/new">+ Post a new movie to your theater</a>
+    <h2>Movies in your theater:</h2>
+    {% for movie in movies %}
+        <div>
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <p>Title: {{ movie.title }} -
+                    {% if user.id == movie.users_id %}
+                    <a href="/movies/{{ movie.id }}/edit">Edit</a>
+                    <form action="/movies/{{ movie.id }}/delete" method="post">
+                        <button type="submit">Delete</button>
+                    </form>
+                    {% endif %}
+                </p>
+            </div>
+            <p>Check the theater : <a href="/movies/{{ movie.id }}">Go in</a></p>
+            <p>Favorited by: {{ movie.user.first_name }} {{ movie.user.last_name }}</p>
+            <p>----------------------------</p>
+        </div>
+    {% endfor %}
+</body>
+</html>
+
+ -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='src/styles.css') }}">
+</head>
+
+<body class="theater-background">
+    <nav class="navbar">
+        <div class="navbar-brand">My Movie Site</div>
+        <ul class="navbar-nav">
+            <li><a href="/movies/all" class="button">Dashboard</a></li>
+            <li><a href="/users/logout" class="button">Logout</a></li>
+        </ul>
+    </nav>
+
+    <main class="content">
+        <h1 class="page-title">Movie List</h1>
+        <p class="description">Find, share, and learn about others' favorite movies!</p>
+
+        <div class="user-info">
+            <h2>Welcome, {{ user.first_name }}!</h2>
+        </div>
+
+        <a class="button" href="/movies/new">+ Post a new movie to your theater</a>
+
+
+        <h2 class="section-title">Movies in Your Theater:</h2>
+
+        <table class="movie-table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Actions</th>
+                    <th>Theater Link</th>
+                    <th>Favorited By</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for movie in movies %}
+                <tr class="movie-row">
+                    <td>{{ movie.title }}</td>
+                    <td class="actions">
+                        {% if user.id == movie.users_id %}
+                        <a class="edit-link" href="/movies/{{ movie.id }}/edit">Edit</a>
+                        <form class="delete-form" action="/movies/{{ movie.id }}/delete" method="post">
+                            <button class="delete-btn" type="submit">Delete</button>
+                        </form>
+                        {% endif %}
+                    </td>
+                    <td><a class="theater-link" href="/movies/{{ movie.id }}">Go in</a></td>
+                    <td>{{ movie.user.first_name }} {{ movie.user.last_name }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </main>
+</body>
+
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='src/styles.css') }}">
+</head>
+
+<body class="theater-background">
+    <nav class="navbar">
+        <div class="navbar-brand">My Movie Site</div>
+        <ul class="navbar-nav">
+            <li><a href="/users/logout" class="button">Logout</a></li>
+        </ul>
+    </nav>
+
+    <main class="content">
+        <h1 class="page-title">Movie List</h1>
+        <p class="description">Find, share, and learn about others' favorite movies!</p>
+
+        <div class="user-info">
+            <h2>Welcome, {{ user.first_name }}!</h2>
+        </div>
+
+        <a class="button" href="/movies/new">+ Post a new movie to your theater</a>
+
+        <h2 class="section-title">Movies:</h2>
+
+        <table class="movie-table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Actions</th>
+                    <th>Theater</th>
+                    <th>Watched By</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for movie in movies %}
+                <tr class="movie-row">
+                    <td>{{ movie.title }}</td>
+                    <td class="actions">
+                        {% if user.id == movie.users_id %}
+                        <a class="button edit-btn" href="/movies/{{ movie.id }}/edit">Edit</a>
+                        <form class="delete-form" action="/movies/{{ movie.id }}/delete" method="post" style="display: inline;">
+                            <button class="button delete-btn" type="submit">Delete</button>
+                        </form>
+                        {% endif %}
+                    </td>
+                    <td><a class="button go-btn" href="/movies/{{ movie.id }}">Go in</a></td>
+                    <td>{{ movie.user.first_name }} {{ movie.user.last_name }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </main>
+</body>
+
+</html>
