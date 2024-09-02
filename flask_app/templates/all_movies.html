@@ -41,6 +41,7 @@
                 {% for movie in movies %}
                 <tr class="movie-row">
                     <td>{{ movie.title }}</td>
+                    <td><img src="{{ movie.poster_url }}" alt="Poster" style="max-width: 100px;"></td>
                     <td class="actions">
                         {% if user.id == movie.users_id %}
                         <a class="button edit-btn" href="/movies/{{ movie.id }}/edit">Edit</a>

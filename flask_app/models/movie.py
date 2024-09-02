@@ -15,6 +15,7 @@ class Movie:
         self.director = data["director"]
         self.release_date = data["release_date"]
         self.score = data["score"]
+        self.poster_url = data.get("poster_url", '') 
         self.created_at = data["created_at"]
         self.updated_at = data["updated_at"]
         self.users_id = data["users_id"]
@@ -101,9 +102,9 @@ class Movie:
 
         query = """
         INSERT INTO movies
-        (title, director,  release_date, score, users_id)
+        (title, director,  release_date, score, users_id, poster_url)
         VALUES
-        (%(title)s, %(director)s, %(release_date)s, %(score)s, %(user_id)s);
+        (%(title)s, %(director)s, %(release_date)s, %(score)s, %(user_id)s, %(poster_url)s);
         """
 
         print(form_data)

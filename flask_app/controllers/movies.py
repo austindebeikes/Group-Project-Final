@@ -2,6 +2,9 @@ from flask_app import app
 from flask import render_template, session, flash, redirect, request
 from flask_app.models.movie import Movie
 from flask_app.models.user import User
+import requests
+
+TMDB_API_KEY = '2d6086ca254b8621b38e157701ad43ff'
 
 @app.get("/movies/all")
 def all_movies():
@@ -34,7 +37,27 @@ def create_movie():
     if not Movie.form_is_valid(request.form):
         return redirect("/movies/new")
     
-    Movie.create(request.form)
+    title = request.form.get('title')
+    tmdb_url = f"https://api.themoviedb.org/3/search/movie?api_key={TMDB_API_KEY}&query={title}"
+    response = requests.get(tmdb_url)
+    movie_data = response.json()
+    print(movie_data)
+    if movie_data['results']:
+        poster_path = movie_data['results'][0].get('poster_path', '')
+        poster_url = f"https://image.tmdb.org/t/p/w500{poster_path}" if poster_path else ''
+    else:
+        poster_url = ''
+
+    form_data = {
+        'title': request.form['title'],
+        'director': request.form['director'],
+        'release_date': request.form['release_date'],
+        'score': request.form['score'],
+        'user_id': session['user_id'],
+        'poster_url': poster_url
+    }
+    
+    Movie.create(form_data)
     return redirect("/movies/all")
 
 @app.get("/movies/<int:movie_id>")
