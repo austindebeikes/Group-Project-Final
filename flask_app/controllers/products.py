@@ -132,14 +132,26 @@ from flask_app.models.product import Product
 from flask_app.models.user import User
 import requests
 
+# @app.get("/products/all")
+# def all_products():
+
+#     if "user_id" not in session:
+#         flash("You must be logged in to view that page", "login")
+#         return redirect("/")
+
+#     products = Product.find_all_with_users()
+#     user = User.find_by_user_id(session["user_id"])
+#     return render_template("all_products.html", products=products, user=user)
+
 @app.get("/products/all")
 def all_products():
-
     if "user_id" not in session:
         flash("You must be logged in to view that page", "login")
         return redirect("/")
 
-    products = Product.find_all_with_users()
+    response = requests.get('https://fakestoreapi.com/products')
+    products = response.json()
+    
     user = User.find_by_user_id(session["user_id"])
     return render_template("all_products.html", products=products, user=user)
 

@@ -1,0 +1,100 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='src/styles.css') }}">
+</head>
+
+<body class="theater-background">
+    <nav class="navbar">
+        <div class="navbar-brand">My Product Site</div>
+        <ul class="navbar-nav">
+            <li><a href="/users/logout" class="button">Logout</a></li>
+        </ul>
+    </nav>
+
+    <main class="content">
+        <h1 class="page-title">Product List</h1>
+        <p class="description">Find, share, and learn about others' favorite products!</p>
+
+        <div class="user-info">
+            <h2>Welcome, {{ user.first_name }}!</h2>
+        </div>
+
+        <a class="button" href="/products/new">+ Post a new product to your theater</a>
+
+        <h2 class="section-title">Products:</h2>
+
+        <table class="product-table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Actions</th>
+                    <th>Theater</th>
+                    <th>Watched By</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                <tr class="product-row">
+                    <td>{{ product.title }}</td>
+                    <td><img src="{{ product.poster_url }}" alt="Poster" style="max-width: 100px;"></td>
+                    <td class="actions">
+                        {% if user.id == product.users_id %}
+                        <a class="button edit-btn" href="/products/{{ product.id }}/edit">Edit</a>
+                        <form class="delete-form" action="/products/{{ product.id }}/delete" method="post" style="display: inline;">
+                            <button class="button delete-btn" type="submit">Delete</button>
+                        </form>
+                        {% endif %}
+                    </td>
+                    <td><a class="button go-btn" href="/products/{{ product.id }}">Go in</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </main>
+</body>
+
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Products</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='src/styles.css') }}">
+</head>
+
+<body class="theater-background">
+    <nav class="navbar">
+        <div class="navbar-brand">My Product Site</div>
+        <ul class="navbar-nav">
+            <li><a href="/products/all" class="button">Dashboard</a></li>
+            <li><a href="/users/logout" class="button">Logout</a></li>
+        </ul>
+    </nav>
+
+    <main class="content">
+        <h1 class="page-title">All Products</h1>
+
+        <div class="product-list">
+            {% for product in products %}
+            <div class="product-item">
+                <h3>{{ product.title }}</h3>
+                <p>{{ product.description }}</p>
+                <p>Price: ${{ product.price }}</p>
+                <p>Category: {{ product.category }}</p>
+                <p>Rating: {{ product.rating.rate }} ({{ product.rating.count }} reviews)</p>
+                <img src="{{ product.image }}" alt="{{ product.title }}" class="product-image">
+            </div>
+            {% endfor %}
+        </div>
+    </main>
+</body>
+
+</html>

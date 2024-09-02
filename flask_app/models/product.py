@@ -168,7 +168,7 @@ from flask_app.config.mysqlconnection import connect_to_mysql
 from flask_app.models.user import User
 from flask import flash
 import re
-from datetime import date
+
 
 
 class Product:
@@ -207,6 +207,10 @@ class Product:
             flash("Please enter a description")
             is_valid = False
 
+        if len(form_data['rating'].strip()) == 0:
+            flash("Please enter a rating")
+            is_valid = False
+
         if len(form_data['category'].strip()) == 0:
             flash("Please enter a category")
             is_valid = False
@@ -232,7 +236,7 @@ class Product:
         query = """
         SELECT * FROM products
         JOIN users
-        ON products.users_id = users.id;
+        ON products.user_id = users.id;
         """
         list_of_dicts = connect_to_mysql(Product._db).query_db(query)
         products = []

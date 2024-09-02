@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='src/styles.css') }}">
+</head>
+<body class="theater-background">
+    <nav class="navbar">
+        <div class="navbar-brand">My Product Site</div>
+        <ul class="navbar-nav">
+            <li><a href="/products/all" class="button">Dashboard</a></li>
+            <li><a href="/users/logout" class="button">Logout</a></li>
+        </ul>
+    </nav>
+    <div class="content">
+        <h1>{{ product.user.first_name }}'s Theater</h1>
+        <p class="description">Check out this awesome product!</p>
+        <div class="product-details">
+            <h2>{{ product.title }}</h2>
+            <p>Added by: {{ product.user.first_name }} {{ product.user.last_name }}</p>
+            <p>Description: {{ product.description }}</p>
+            <p>Price: {{ product.price }}</p>
+            <p>Rating: {{ product.rating }}</p>
+            <p>Category: {{ product.category }}</p>
+        </div>
+    </div>
+</body>
+</html>
