@@ -260,10 +260,9 @@ class Product:
     
     @classmethod
     def create(cls, form_data):
-
         query = """
         INSERT INTO products
-        (title, price, description, category, users_id, image_url, rating)
+        (title, price, description, category, user_id, image_url, rating)
         VALUES
         (%(title)s, %(price)s, %(description)s, %(category)s, %(user_id)s, %(image_url)s, %(rating)s);
         """
@@ -271,6 +270,14 @@ class Product:
         product_id = connect_to_mysql(Product._db).query_db(query, form_data)
         return product_id
     
+    @classmethod
+    def find_by_id(cls, product_id):
+        query = "SELECT * FROM products WHERE id = %s"
+        result = connect_to_mysql(cls._db).query_db(query, (product_id,))
+        if result:
+            return result[0]  
+        return None
+
     @classmethod
     def find_by_id_with_user(cls, product_id):
 
@@ -325,6 +332,24 @@ class Product:
         data = {"product_id": product_id}
         connect_to_mysql(Product._db).query_db(query, data)
         return
+
+    @classmethod
+    def add_to_favorites(cls, user_id, product_id):
+        query = "INSERT INTO favorites (user_id, product_id) VALUES (%(user_id)s, %(product_id)s);"
+        data = {"user_id": user_id, "product_id": product_id}
+        return connect_to_mysql(Product._db).query_db(query, data)
+
+    @classmethod
+    def find_favorites_by_user(cls, user_id):
+        query = """
+            SELECT products.*, favorites.created_at AS favorited_at 
+            FROM products 
+            JOIN favorites ON products.id = favorites.product_id 
+            WHERE favorites.user_id = %(user_id)s;
+        """
+        data = {"user_id": user_id}
+        return connect_to_mysql(Product._db).query_db(query, data)
+
 
 
 

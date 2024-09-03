@@ -2,6 +2,7 @@ from flask_app.config.mysqlconnection import connect_to_mysql
 from flask import flash
 import re
 
+
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 
 class User:
@@ -107,3 +108,7 @@ class User:
             return None
         user = User(list_of_dicts[0])
         return user
+    
+    @classmethod
+    def find_favorites(cls, user_id):
+        return Product.find_favorites_by_user(user_id)

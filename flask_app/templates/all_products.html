@@ -60,7 +60,14 @@
 
 </html> -->
 
-<!DOCTYPE html>
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -97,4 +104,66 @@
     </main>
 </body>
 
+</html> -->
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Products</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='src/styles.css') }}">
+</head>
+<body class="theater-background">
+    <nav class="navbar">
+        <div class="navbar-brand">My Product Site</div>
+        <ul class="navbar-nav">
+            <li><a href="/users/{{ user.id }}/products" class="button">Your Products</a></li>
+            <li><a href="/users/logout" class="button">Logout</a></li>
+        </ul>
+    </nav>
+    <main class="content">
+        <h1 class="page-title">All Products</h1>
+
+        <div class="user-info">
+            <h2>Welcome {{ user.first_name }}!</h2>
+        </div>
+
+        {% with errors = get_flashed_messages() %}
+        {% if errors %}
+        <ul class="message-list">
+            {% for error in errors %}
+            <li class="message-item">{{ error }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+
+        <div class="product-list">
+            {% for product in products %}
+            <div class="product-item">
+                <h2>{{ product.title }}</h2>
+                <!-- <p>Description: {{ product.description }}</p> -->
+                <p>Price: {{ product.price }}</p>
+                <p><strong>Rating:</strong> {{ product.rating['rate'] }} by {{ product.rating['count'] }} people</p>
+                <!-- <p>Category: {{ product.category }}</p> -->
+                <img src="{{ product.image }}" alt="{{ product.title }}" style="max-width: 30%; height: auto;">
+                <div class="product-buttons">
+                    <a href="/products/{{ product.id }}" class="button">View</a>
+                    <!-- <a href="/products/{{ product.id }}/edit" class="button">Edit</a>
+                    <form action="/products/{{ product.id }}/delete" method="post" style="display:inline;">
+                        <button type="submit" class="button" onclick="return confirm('Are you sure you want to delete this product?');">Delete</button>
+                    </form> -->
+                </div>
+                <form action="/products/{{ product.id }}/favorite" method="post">
+                    <button type="submit">Add to My List</button>
+                </form>
+            </div>
+            {% endfor %}
+        </div>
+    </main>
+</body>
 </html>
