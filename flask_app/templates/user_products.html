@@ -27,7 +27,6 @@
                 <p>Category: {{ product.category }}</p>
                 <img src="{{ product.image_url }}" alt="{{ product.title }}" style="max-width: 30%; height: auto;">
                 <div class="product-buttons">
-                    <!-- <a href="/products/{{ product.id }}" class="button">View</a> -->
                     <form action="/products/{{ product.id }}/remove" method="post" style="display:inline;">
                         <button type="submit" class="button" onclick="return confirm('Are you sure you want to remove this product?');">Remove</button>
                     </form>

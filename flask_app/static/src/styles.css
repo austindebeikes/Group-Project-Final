@@ -1,16 +1,14 @@
-/* General body and font styling */
 body.theater-background {
-    background-color: #2c3e50; /* Dark background for movie theater vibe */
-    color: #ecf0f1; /* Light text color for contrast */
-    font-family: 'Roboto', sans-serif; /* Fallback font */
-    text-align: center; /* Center-align text */
+    background-color: #2c3e50; 
+    color: #ecf0f1; 
+    font-family: 'Roboto', sans-serif; 
+    text-align: center; 
     margin: 0;
     padding: 0;
 }
 
-/* Navbar styling */
 .navbar {
-    background-color: #34495e; /* Dark blue color */
+    background-color: #34495e; 
     color: #ecf0f1;
     padding: 10px;
     display: flex;
@@ -183,7 +181,6 @@ form button:hover {
     background-color: #27ae60;
 }
 
-/* Table styling */
 .movie-table {
     width: 100%;
     border-collapse: collapse;
@@ -207,12 +204,10 @@ form button:hover {
     background-color: #34495e;
 }
 
-/* Movie row styling */
 .movie-row {
     border-bottom: 1px solid #2c3e50;
 }
 
-/* Actions column styling */
 .actions {
     display: flex;
     gap: 10px;
@@ -228,15 +223,14 @@ form button:hover {
     text-decoration: underline;
 }
 
-/* Add this to your styles.css file */
 
 .product-image {
-    max-width: 200px; /* Adjust the max-width as needed */
-    max-height: 200px; /* Adjust the max-height as needed */
+    max-width: 200px; 
+    max-height: 200px; 
     width: auto;
     height: auto;
     display: block;
-    margin: 0 auto; /* Centers the image horizontally */
+    margin: 0 auto; 
     margin-bottom: 30px;
 }
 
